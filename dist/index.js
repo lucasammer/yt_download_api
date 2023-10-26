@@ -20,6 +20,15 @@ app.get("/url", (req, res) => {
     res.writeHead(200);
     (0, ytdl_core_1.default)(req.query.url.toString()).pipe(res);
 });
+app.get("/id", (req, res) => {
+    if (!ytdl_core_1.default.validateID(req.query.id.toString())) {
+        res.send("Invalid id!");
+        return;
+    }
+    res.setHeader("Content-Type", "video/mp4");
+    res.writeHead(200);
+    (0, ytdl_core_1.default)(req.query.id.toString()).pipe(res);
+});
 app.listen(PORT, () => {
     console.log(`Server Running here 👉 https://localhost:${PORT}\n                    ^ I did not do this`);
 });

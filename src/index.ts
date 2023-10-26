@@ -23,17 +23,17 @@ app.get("/url", (req: Request, res: Response): void => {
 });
 
 app.get("/id", (req: Request, res: Response): void => {
-  if (!ytdl.validateID(ytdl.getURLVideoID(req.query.id.toString()))) {
+  if (!ytdl.validateID(req.query.id.toString())) {
     res.send("Invalid id!");
     return;
   }
   res.setHeader("Content-Type", "video/mp4");
   res.writeHead(200);
-  ytdl(req.query.url.toString()).pipe(res);
+  ytdl(req.query.id.toString()).pipe(res);
 });
 
 app.listen(PORT, (): void => {
   console.log(
-    `Server Running here 👉 https://localhost:${PORT}\n                    ^ I did not do this`
+    `Server Running here 👉 http://localhost:${PORT}\n                    ^ I did not do this`
   );
 });
